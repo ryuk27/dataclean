@@ -11,7 +11,6 @@ This repository contains scripts and instructions for cleaning a dataset on layo
   - [3. Handle Null or Blank Values](#3-handle-null-or-blank-values)
   - [4. Remove Unnecessary Columns](#4-remove-unnecessary-columns)
 - [Usage](#usage)
-- [License](#license)
 
 ## Dataset
 
@@ -42,3 +41,26 @@ UPDATE layoffs
 SET company = UPPER(company),
     date = DATE_FORMAT(date, '%Y-%m-%d'),
     reason = CONCAT(UCASE(LEFT(reason, 1)), LCASE(SUBSTRING(reason, 2)));
+
+### 3. Handle Null or Blank Values
+
+Null or blank values can affect analysis and computations. We will handle these values appropriately, either by replacing them with meaningful defaults or by removing the corresponding rows.
+
+Example SQL Query:
+```sql
+DELETE FROM layoffs
+WHERE company IS NULL OR date IS NULL OR employees_laid_off IS NULL;
+
+### 4. Remove Unnecessary Columns
+
+Removing unnecessary columns streamlines the dataset and focuses analysis on relevant attributes.
+
+Example SQL Query:
+ALTER TABLE layoffs
+DROP COLUMN column_name;
+
+## Usage
+
+1. Setup: Download the dataset from Kaggle and place it in the root directory of this repository.
+2. Run Scripts: Execute the provided MySQL scripts in your MySQL environment, following the order specified in the scripts/ directory.
+3. Review Results: After running each script, review the cleaned dataset to ensure accuracy and completeness.
