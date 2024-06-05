@@ -30,6 +30,7 @@ WHERE id NOT IN (
     FROM layoffs
     GROUP BY company, date, employees_laid_off
 );
+```sql
 
 ### 2. Standardize the Data
 
@@ -41,6 +42,7 @@ UPDATE layoffs
 SET company = UPPER(company),
     date = DATE_FORMAT(date, '%Y-%m-%d'),
     reason = CONCAT(UCASE(LEFT(reason, 1)), LCASE(SUBSTRING(reason, 2)));
+```sql
 
 ### 3. Handle Null or Blank Values
 
@@ -50,14 +52,17 @@ Example SQL Query:
 ```sql
 DELETE FROM layoffs
 WHERE company IS NULL OR date IS NULL OR employees_laid_off IS NULL;
+```sql
 
 ### 4. Remove Unnecessary Columns
 
 Removing unnecessary columns streamlines the dataset and focuses analysis on relevant attributes.
 
 Example SQL Query:
+```sql
 ALTER TABLE layoffs
 DROP COLUMN column_name;
+```sql
 
 ## Usage
 
