@@ -22,47 +22,17 @@ The dataset used in this project can be found on Kaggle: [Layoffs 2022 Dataset](
 
 Duplicates in the dataset can skew analysis and lead to incorrect conclusions. We will use SQL queries to identify and remove duplicate rows.
 
-Example SQL Query:
-```sql
-DELETE FROM layoffs
-WHERE id NOT IN (
-    SELECT MIN(id)
-    FROM layoffs
-    GROUP BY company, date, employees_laid_off
-);
-```sql
-
 ### 2. Standardize the Data
 
 Data standardization ensures consistency in data format and representation across all fields. This step involves converting data into a uniform format where necessary.
-
-Example SQL Query:
-```sql
-UPDATE layoffs
-SET company = UPPER(company),
-    date = DATE_FORMAT(date, '%Y-%m-%d'),
-    reason = CONCAT(UCASE(LEFT(reason, 1)), LCASE(SUBSTRING(reason, 2)));
-```sql
 
 ### 3. Handle Null or Blank Values
 
 Null or blank values can affect analysis and computations. We will handle these values appropriately, either by replacing them with meaningful defaults or by removing the corresponding rows.
 
-Example SQL Query:
-```sql
-DELETE FROM layoffs
-WHERE company IS NULL OR date IS NULL OR employees_laid_off IS NULL;
-```sql
-
 ### 4. Remove Unnecessary Columns
 
 Removing unnecessary columns streamlines the dataset and focuses analysis on relevant attributes.
-
-Example SQL Query:
-```sql
-ALTER TABLE layoffs
-DROP COLUMN column_name;
-```sql
 
 ## Usage
 
